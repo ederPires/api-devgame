@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from 'uuid'; // Para gerar IDs únicos
 
 /**
  * Schema first approach
- * primeira coisa meche no schema, depois vai no código e cria os resolvers
+ * primeira coisa mecher no schema, depois vai no código e cria os resolvers
  *
  * Existe outra abordagem 📖
  *

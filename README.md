@@ -1,6 +1,6 @@
 # api-node
  criando api com node e apollo
-
+[Tutorial](https://www.youtube.com/watch?v=1dz48pReq_c&ab_channel=Rocketseat)
 [github api-node](https://github.com/ederPires/api-node)
 [Documentação Apollo](https://www.apollographql.com/docs/apollo-server/)
 [Typegraphql](https://typegraphql.com/docs/introduction.html)
