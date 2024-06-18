@@ -1,0 +1,23 @@
+Listar Jogos
+- nome (nome do jogo: Counter-strike) string
+- url (http://drive.google/img1) string
+- categoria (Multijogador , Single-player, AAA, VR , Educação, Mobile) string
+
+Detail
+Detalhes do jogo:
+- nome
+- data lançamento (2024-06-10) Date
+- rating (1.0 a 10.0) float
+- plataformas disponíveis (PC, Xbox 360, PlayStation 3) string
+- gêneros (Ação, aventura, RPG, Simulação, Esporte, Corrida) string
+- descrição (lorem ipsun....) string
+- link do site do game (http://www.cs.com) string
+
+Jogo tem
+- um nome - string
+- um descrição - string
+- uma data de lançamento - Date
+- um rating - float
+- link do site - string
+- vários generos []
+- várias categorias []
