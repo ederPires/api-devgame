@@ -19,5 +19,6 @@ Jogo tem
 - uma data de lançamento - Date
 - um rating - float
 - link do site - string
-- vários generos []
-- várias categorias []
+- vários generos [string]
+- várias categorias [string]
+- várias plataformas [string]
