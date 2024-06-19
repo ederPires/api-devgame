@@ -53,3 +53,44 @@ npm run dev // rodar aplicação
 "emitDecoratorMetadata": true,
 "strictPropertyInitialization": false,
 ```
+
+#### Integrar ao SQlite
+
+```Javascript
+npm install typeorm sqlite3 reflect-metadata // instalar
+
+// Atualizar os modelos para usar as entidades do TypeORM.
+// Criar o index
+npm install typeorm --save-dev // atualizar o package
+
+"scripts": {
+    "typeorm": "typeorm-ts-node-commonjs"
+  }
+
+npm run typeorm migration:run // rodar as migrações
+```
+
+#### Integrar ao mysql
+
+```Javascript
+npm install mysql typeorm reflect-metadata // instalar
+
+npx typeorm migration:create -n CreateGames // criar migrations
+
+npx typeorm migration:run // rodar as migrações
+
+// Docker
+docker compose up // rodar o docker com mysql
+docker compose exec db bash // entrar no docker
+mysql -u root -p // entrar no mysql
+show tables; // ver as tabelas
+select * from User; // ver os dados de User
+describre User; // ver a estrutura de User
+exit // sair do mysql
+exit // sair do docker
+
+npx typeorm migration:run -d src/database/connection.ts // erro
+
+node run-migrations.js //erro mas foi
+
+```

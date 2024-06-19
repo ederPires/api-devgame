@@ -1,8 +1,9 @@
 import { Arg, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { CreateGameInput } from '../dtos/inputs/create-game-inputs';
 import { Game } from '../dtos/models/game-model';
-import { Genre, genres } from '../dtos/models/genres-model';
+import { Genre } from '../dtos/models/genres-model';
 import { v4 as uuidv4 } from 'uuid';
+import { getRepository } from 'typeorm'
 
 // Lista de games persistentes
 export const games: Game[] = [
@@ -43,40 +44,31 @@ export class GameResolver {
   }
 
   // Lista os games
-  @Query(() => [Game]) // Alteração aqui para retornar um array de Game
+  @Query(() => [Game])
   async games(): Promise<Game[]> {
-    return games; // retorna a lista de games
+    return this.gameRepository.find({ relations: ['genre'] });
   }
 
   // Cria um game
-  @Mutation(() => Game) // vem do model
+  @Mutation(() => Game)
   async CreateGame(@Arg('data') data: CreateGameInput): Promise<Game> {
-    // busca um genero na lista
-    const genre = genres.find((g) => g.id === data.genreId);
+    const genre = await this.genreRepository.findOne(data.genreId);
     if (!genre) {
       throw new Error('Genre not found');
     }
 
-    // Simula a criação de um objeto Game com os dados fornecidos
-    const game: Game = {
-      id: uuidv4(),
-      name: data.name,
-      description: data.description,
-      dateRelease: data.dateRelease,
-      rating: data.rating,
-      site: data.site,
-      genre: genre,
-    };
-    // Aqui seria o lugar para a lógica real de criação do game no banco de dados, por exemplo
-    games.push(game); // Adicionando o novo game à lista persistente
-    
+    const game = this.gameRepository.create({
+      ...data,
+      genre,
+    });
+
+    await this.gameRepository.save(game);
+
     return game;
   }
 
-  //relaciona com o genero
-  // retorna o valor do genero do objeto game
   @FieldResolver(() => Genre)
-  async genre(@Root() game: Game) {
-    return game.genre;
+  async genre(@Root() game: Game): Promise<Genre> {
+    return this.genreRepository.findOne(game.genre.id);
   }
 }
