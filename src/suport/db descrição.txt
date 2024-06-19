@@ -22,3 +22,13 @@ Jogo tem
 - vários generos [string]
 - várias categorias [string]
 - várias plataformas [string]
+
+ING:
+name
+description
+release date of
+rating
+siteGame
+genres
+categories
+platforms

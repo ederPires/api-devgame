@@ -3,19 +3,16 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-type Appointment {
-  customer: Customer!
-  endsAt: DateTimeISO!
-  startsAt: DateTimeISO!
+input CreateGameInput {
+  dateRelease: DateTimeISO!
+  description: String!
+  genreId: String!
+  name: String!
+  rating: Float!
+  site: String!
 }
 
-input CreateAppointmentInput {
-  customerId: String!
-  endsAt: DateTimeISO!
-  startsAt: DateTimeISO!
-}
-
-type Customer {
+input CreateGenreInput {
   name: String!
 }
 
@@ -24,11 +21,28 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTimeISO
 
+type Game {
+  dateRelease: DateTimeISO!
+  description: String!
+  genre: Genre!
+  id: ID!
+  name: String!
+  rating: Float!
+  site: String!
+}
+
+type Genre {
+  id: ID!
+  name: String!
+}
+
 type Mutation {
-  CreateAppointment(data: CreateAppointmentInput!): Appointment!
+  CreateGame(data: CreateGameInput!): Game!
+  CreateGenre(data: CreateGenreInput!): Genre!
 }
 
 type Query {
-  appointments: [Appointment!]!
-  helloWorld: String!
+  games: [Game!]!
+  genres: [Genre!]!
+  helloGame: String!
 }
