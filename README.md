@@ -93,4 +93,7 @@ npx typeorm migration:run -d src/database/connection.ts // erro
 
 node run-migrations.js //erro mas foi
 
+// Iniciando o prisma
+npm install @prisma/client
+npx prisma init
 ```
