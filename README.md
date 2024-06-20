@@ -5,6 +5,7 @@
 [Documentação Apollo](https://www.apollographql.com/docs/apollo-server/)
 [Typegraphql](https://typegraphql.com/docs/introduction.html)
 [Figma](https://www.figma.com/design/nm1k9zoVt2vdBZV6RtmWAk/Game-App-Desafio?node-id=0-1)
+
 ```Javascript
 
 npm init -y // iniciar o projeto
@@ -27,14 +28,13 @@ npm i uuid // Para gerar IDs únicos
 npm install graphql graphql-scalars type-graphql // Instalar
 
 npm install reflect-metadata //dependências
-
+//teste
 
 ```
 
 #### Criando servidor avançado
 
 caminho inicial
-
 src/server.ts
 
 ```Javascript
@@ -96,4 +96,5 @@ node run-migrations.js //erro mas foi
 // Iniciando o prisma
 npm install @prisma/client
 npx prisma init
+
 ```
