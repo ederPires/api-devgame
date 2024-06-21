@@ -107,10 +107,3 @@ npm install @prisma/client
 npx prisma init
 
 ```
-
-`[]` teste
-`[x]` teste
-
-- [] novo
-
-
