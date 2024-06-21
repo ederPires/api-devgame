@@ -77,7 +77,10 @@ npm install typeorm reflect-metadata mysql
 
 npm install typeorm reflect-metadata mysql apollo-server type-graphql // todas as dependências
 
+npm install -g npm@10.8.1
 
+
+xxx
 npm install mysql typeorm reflect-metadata // instalar
 
 npx typeorm migration:create -n CreateGames // criar migrations
