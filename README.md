@@ -102,4 +102,5 @@ node run-migrations.js //erro mas foi
 npm install @prisma/client
 npx prisma init
 
+teste
 ```
