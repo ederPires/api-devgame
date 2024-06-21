@@ -106,5 +106,9 @@ node run-migrations.js //erro mas foi
 // error 1.0
 npm install ts-node typescript
 
+npx tsc
+
+ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run
+
 
 ```

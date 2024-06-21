@@ -1,6 +1,7 @@
 import { createConnection } from 'typeorm';
 import path from 'path';
 
+
 createConnection({
   type: 'mysql',
   host: 'localhost',
