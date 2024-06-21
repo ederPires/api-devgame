@@ -1,23 +1,26 @@
-// src/index.ts
-import 'reflect-metadata';
-import { createConnection } from 'typeorm';
-import { ApolloServer } from 'apollo-server';
-import { buildSchema } from 'type-graphql';
-import { GameResolver } from './resolvers/game-resovers';
-import { GenreResolver } from './resolvers/genre-resovers';
+import "reflect-metadata";
+import { createConnection } from "typeorm";
+import { ApolloServer } from "apollo-server";
+import { buildSchema } from "type-graphql";
+import { GameResolver } from "./resolvers/game-resolver";
+import { GenreResolver } from "./resolvers/genre-resolver";
 
 async function startServer() {
-  await createConnection(); // Conecta ao banco de dados usando ormconfig.json
+  try {
+    await createConnection(); // Conecta ao banco de dados usando ormconfig.json
 
-  const schema = await buildSchema({
-    resolvers: [GameResolver, GenreResolver],
-  });
+    const schema = await buildSchema({
+      resolvers: [GameResolver, GenreResolver],
+    });
 
-  const server = new ApolloServer({ schema });
+    const server = new ApolloServer({ schema });
 
-  server.listen(4000, () =>
-    console.log('Server is running on http://localhost:4000/graphql')
-  );
+    server.listen(4000, () =>
+      console.log("Server is running on http://localhost:4000/graphql")
+    );
+  } catch (error) {
+    console.log("Erro ao iniciar o servidor:", error);
+  }
 }
 
-startServer().catch((error) => console.log(error));
+startServer();

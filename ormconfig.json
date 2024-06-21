@@ -4,14 +4,20 @@
   "port": 3306,
   "username": "root",
   "password": "root",
-  "database": "dbgame",
-  "synchronize": false,
-  "logging": true,
-  "entities": ["src/dtos/models/**/*.ts"],
-  "migrations": ["src/migration/**/*.ts"],
-  "subscribers": ["src/subscriber/**/*.ts"],
+  "database": "gamedb",
+  "synchronize": true,
+  "logging": false,
+  "entities": [
+    "src/entity/**/*.ts"
+  ],
+  "migrations": [
+    "src/migration/**/*.ts"
+  ],
+  "subscribers": [
+    "src/subscriber/**/*.ts"
+  ],
   "cli": {
-    "entitiesDir": "src/dtos/models",
+    "entitiesDir": "src/entity",
     "migrationsDir": "src/migration",
     "subscribersDir": "src/subscriber"
   }

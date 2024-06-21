@@ -73,6 +73,11 @@ npm run typeorm migration:run // rodar as migrações
 #### Integrar ao mysql
 
 ```Javascript
+npm install typeorm reflect-metadata mysql
+
+npm install typeorm reflect-metadata mysql apollo-server type-graphql // todas as dependências
+
+
 npm install mysql typeorm reflect-metadata // instalar
 
 npx typeorm migration:create -n CreateGames // criar migrations
