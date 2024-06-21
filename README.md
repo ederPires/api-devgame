@@ -79,13 +79,14 @@ npm install typeorm reflect-metadata mysql apollo-server type-graphql // todas a
 
 npm install -g npm@10.8.1
 
-
-xxx
 npm install mysql typeorm reflect-metadata // instalar
 
 npx typeorm migration:create -n CreateGames // criar migrations
 
 npx typeorm migration:run // rodar as migrações
+
+
+xxx
 
 // Docker
 docker compose up // rodar o docker com mysql
