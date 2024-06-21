@@ -85,11 +85,12 @@ npx typeorm migration:create -n CreateGames // criar migrations
 
 npx typeorm migration:run // rodar as migrações
 
+docker compose up // rodar o docker com mysql
 
 xxx
 
 // Docker
-docker compose up // rodar o docker com mysql
+
 docker compose exec db bash // entrar no docker
 mysql -u root -p // entrar no mysql
 show tables; // ver as tabelas
@@ -102,8 +103,8 @@ npx typeorm migration:run -d src/database/connection.ts // erro
 
 node run-migrations.js //erro mas foi
 
-// Iniciando o prisma
-npm install @prisma/client
-npx prisma init
+// error 1.0
+npm install ts-node typescript
+
 
 ```
