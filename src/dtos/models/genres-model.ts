@@ -20,12 +20,19 @@ export class Genre {
 
 
 // Definindo uma lista de gêneros com IDs fixos
-/* para teste sem DB
+/* para teste sem DB */
 export const genres: Genre[] = [
-  { id: 'a94cc4c9-cfb3-4053-afda-f452e8882bf7', name: 'Ação' },
-  { id: 'b84dc2b8-cfb3-4053-afda-f452e8882cf8', name: 'Aventura' },
-  { id: 'c74ec3d7-cfb3-4053-afda-f452e8882df9', name: 'RPG' },
+  {
+    id: 'a94cc4c9-cfb3-4053-afda-f452e8882bf7', name: 'Ação',
+    games: []
+  },
+  {
+    id: 'b84dc2b8-cfb3-4053-afda-f452e8882cf8', name: 'Aventura',
+    games: []
+  },
+  {
+    id: 'c74ec3d7-cfb3-4053-afda-f452e8882df9', name: 'RPG',
+    games: []
+  },
   //{ id: uuidv4(), name: 'Luta' },
 ];
-
-*/

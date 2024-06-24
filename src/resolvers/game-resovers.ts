@@ -1,9 +1,8 @@
 import { Arg, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { CreateGameInput } from '../dtos/inputs/create-game-inputs';
 import { Game } from '../dtos/models/game-model';
-import { Genre } from '../dtos/models/genres-model';
+import { Genre, genres } from '../dtos/models/genres-model';
 import { v4 as uuidv4 } from 'uuid';
-import { getRepository } from 'typeorm'
 
 // Lista de games persistentes
 export const games: Game[] = [
@@ -38,6 +37,7 @@ export const games: Game[] = [
 
 @Resolver(() => Game)
 export class GameResolver {
+  gameRepository: any;
   @Query(() => String)
   async helloGame() {
     return 'Hello Game';
@@ -52,7 +52,7 @@ export class GameResolver {
   // Cria um game
   @Mutation(() => Game)
   async CreateGame(@Arg('data') data: CreateGameInput): Promise<Game> {
-    const genre = await this.genreRepository.findOne(data.genreId);
+    const genre = await this.gameRepository.findOne(data.genreId);
     if (!genre) {
       throw new Error('Genre not found');
     }
@@ -69,6 +69,6 @@ export class GameResolver {
 
   @FieldResolver(() => Genre)
   async genre(@Root() game: Game): Promise<Genre> {
-    return this.genreRepository.findOne(game.genre.id);
+    return this.gameRepository.findOne(game.genre.id);
   }
 }
