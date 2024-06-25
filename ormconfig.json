@@ -2,9 +2,9 @@
   "type": "mysql",
   "host": "localhost",
   "port": 3306,
-  "username": "root",
-  "password": "root",
-  "database": "gamedb",
+  "username": "ederpbj",
+  "password": "b@tista",
+  "database": "dbgame",
   "synchronize": true,
   "logging": false,
   "entities": [

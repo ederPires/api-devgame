@@ -85,11 +85,12 @@ npx typeorm migration:create -n CreateGames // criar migrations
 
 npx typeorm migration:run // rodar as migrações
 
+docker compose up // rodar o docker com mysql
 
 xxx
 
 // Docker
-docker compose up // rodar o docker com mysql
+
 docker compose exec db bash // entrar no docker
 mysql -u root -p // entrar no mysql
 show tables; // ver as tabelas
@@ -102,8 +103,49 @@ npx typeorm migration:run -d src/database/connection.ts // erro
 
 node run-migrations.js //erro mas foi
 
-// Iniciando o prisma
-npm install @prisma/client
-npx prisma init
+// error 1.0
+npm install ts-node typescript
+
+npx tsc
+
+// error 1.2
+
+docker rm mysql-container // remover um container
+
+ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run
+
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root -d mysql:latest --default-authentication-plugin=mysql_native_password
+
+docker run --name game-container -e MYSQL_ROOT_PASSWORD=root -d mysql:latest --default-authentication-plugin=mysql_native_password --protocol=TCP --mysqlx=OFF
+
+docker compose up // rodar o docker com mysql
+
+docker compose exec db bash // entrar no docker
+
+mysql -u root -p // entrar no mysql
+
+CREATE USER 'ederpbj' IDENTIFIED WITH mysql_native_password BY 'b@tista'; //cria um novo usuário no mysql
+
+GRANT ALL PRIVILEGES ON *.* TO 'ederpbj'; // dar privilégios
+
+FLUSH PRIVILEGES; // confirmar, exit, exit
+
+//configurar o ormconfig
+
+yarn typeorm migration:run // migrar o banco
+
+
+npm install -g ts-node // instalar type-script global
+
+npm install typescript
+
+// migração ok
+ npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d src/database/data-source.ts
+
+npm run dev:server // rodar e testar
+
+yarn add typeorm-typedi-extensions
+yarn add typedi
+
 
 ```

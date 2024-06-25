@@ -1,12 +1,12 @@
-import { createConnection } from 'typeorm';
+import { DataSource } from 'typeorm';
 import path from 'path';
 
-createConnection({
+export const AppDataSource = new DataSource({
   type: 'mysql',
   host: 'localhost',
   port: 3306,
-  username: 'root',
-  password: 'root',
+  username: 'ederpbj',
+  password: 'b@tista',
   database: 'dbgame',
   entities: [
     path.join(__dirname, '../dtos/models/**/*.ts')
@@ -17,8 +17,6 @@ createConnection({
   subscribers: [
     path.join(__dirname, '../subscriber/**/*.ts')
   ],
-  synchronize: false, // Set to true for development, false for production
-  logging: true
-}).then(connection => {
-  // Here you can start to work with your entities
-}).catch(error => console.log(error));
+  synchronize: false,
+  logging: true,
+});
