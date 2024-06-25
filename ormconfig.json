@@ -4,7 +4,7 @@
   "port": 3306,
   "username": "ederpbj",
   "password": "b@tista",
-  "database": "dbgame",
+  "database": "game",
   "synchronize": true,
   "logging": false,
   "entities": [

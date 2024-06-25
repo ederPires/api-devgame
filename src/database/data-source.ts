@@ -7,7 +7,7 @@ export const AppDataSource = new DataSource({
   port: 3306,
   username: 'ederpbj',
   password: 'b@tista',
-  database: 'dbgame',
+  database: 'game',
   entities: [
     path.join(__dirname, '../dtos/models/**/*.ts')
   ],

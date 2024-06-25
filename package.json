@@ -5,10 +5,19 @@
   "main": "index.js",
   "scripts": {
     "dev:simple": "tsnd --respawn --transpile-only simple-server.ts",
-    "dev:server": "tsnd --respawn --transpile-only src/server.ts",
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "dev": "tsnd --respawn --transpile-only src/server.ts",
     "migration:rundev": "npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d src/database/data-source.ts",
-    "migration:run": "npm run typeorm migration:run"
+    "dev:server": "ts-node-dev -r tsconfig-paths/register  --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "start": "ts-node src/server.ts",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "schema:sync": "npx typeorm-ts-node-commonjs schema:sync",
+    "typeorm:cache": "npx typeorm-ts-node-commonjs cache:clear",
+    "schema:drop": "npx typeorm-ts-node-commonjs -d ./src/database/data-source.ts",
+    "migration:create": "typeorm migration:create ./src/migrations/schema-update",
+    "migration:generate": "npx typeorm-ts-node-commonjs migration:generate ./src/migrations/schema-update -d ./src/database/data-source.ts",
+    "migration:show": "npx typeorm-ts-node-commonjs migration:show -d ./src/database/data-source.ts",
+    "migration:run": "npx typeorm-ts-node-commonjs migration:run -d  ./src/database/data-source.ts",
+    "migration:revert": "npx typeorm-ts-node-commonjs migration:revert -d ./src/database/data-source.ts"
   },
   "keywords": [],
   "author": "",

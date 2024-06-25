@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOne } from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql";
 import { Genre } from "./Genre";
 
@@ -19,5 +19,6 @@ export class Game {
 
   @Field(() => Genre)
   @ManyToOne(() => Genre, genre => genre.games)
+  @JoinColumn({ name: "id" })
   genre: Genre;
 }
