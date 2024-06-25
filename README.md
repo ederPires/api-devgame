@@ -122,7 +122,7 @@ docker compose up // rodar o docker com mysql
 
 docker compose exec db bash // entrar no docker
 
-mysql -u root -p // entrar no mysql
+mysql -u ederpbj -p // entrar no mysql
 
 CREATE USER 'ederpbj' IDENTIFIED WITH mysql_native_password BY 'b@tista'; //cria um novo usuário no mysql
 
@@ -133,7 +133,6 @@ FLUSH PRIVILEGES; // confirmar, exit, exit
 //configurar o ormconfig
 
 yarn typeorm migration:run // migrar o banco
-
 
 npm install -g ts-node // instalar type-script global
 
@@ -147,5 +146,35 @@ npm run dev:server // rodar e testar
 yarn add typeorm-typedi-extensions
 yarn add typedi
 
+// acessando mysql
+docker compose exec db bash // entrar no docker
 
+mysql -u ederpbj -p // entrar no mysql
+
+use dbgame // seleciona o db
+
+show tables; // exibe as tabelas
+
+SELECT * FROM migrations
+
+// criar a tabela no db
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+yarn global add typeorm ts-node
+
+npm run dev
+
+typeorm migration:create -n CriarTabelaGame -d src/database/migrations
+
+typeorm migration:create ./path-to-migrations-dir/PostRefactoring
+
+
+typeorm migration:run // migração
 ```

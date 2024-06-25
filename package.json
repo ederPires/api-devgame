@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev:simple": "tsnd --respawn --transpile-only simple-server.ts",
-    "dev:server": "tsnd --respawn --transpile-only src/server.ts",
+    "dev": "tsnd --respawn --transpile-only src/server.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migration:rundev": "npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d src/database/data-source.ts",
     "migration:run": "npm run typeorm migration:run"
