@@ -173,4 +173,22 @@ npm run migration:generate // migração com npm, funcionou
 npm run migration:run // rodar
 
 
+// Mudar para postgres
+yarn add typeorm pg reflect-metadata // instalar pacote necessário
+
+yarn typeorm migration:create -n CreateUserTable // fazer a migração
+
+npm run migration:generate // migração com npm, funcionou
+
+npm run migration:run // rodar migração
+
+npm run migration:revert // reverte as migrações feitas
+
+npm run dev // rodar projeto
+
+// Erro de migração corrigido no package
+// apagar as migrations, gerar novamente
+
+
+
 ```
