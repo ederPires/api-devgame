@@ -1,7 +1,7 @@
 import { Arg, Mutation, Query, Resolver } from 'type-graphql';
 import { User } from '../dtos/models/user-model';
 import { CreateUserInput } from '../dtos/inputs/create-user-input';
-import { AppDataSource } from '../data-source';
+import { AppDataSource } from '../database/data-source';
 
 @Resolver(() => User)
 export class UserResolver {

@@ -1,43 +1,18 @@
 import { Arg, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { CreateGameInput } from '../dtos/inputs/create-game-inputs';
 import { Game } from '../dtos/models/game-model';
-import { Genre, genres } from '../dtos/models/genres-model';
+import { Genre } from '../dtos/models/genres-model';
 import { v4 as uuidv4 } from 'uuid';
-
-// Lista de games persistentes
-export const games: Game[] = [
-  {
-    id: uuidv4(),
-    name: 'CS-gol',
-    description: 'Jogo de tiro',
-    dateRelease: new Date('2005-05-08'),
-    rating: 7.5,
-    site: 'https://www.cs.com',
-    genre: genres[0],
-  },
-  {
-    id: uuidv4(),
-    name: 'Roblox',
-    description: 'Jogo de mundo aberto, com blocos',
-    dateRelease: new Date('2015-07-18'),
-    rating: 8.9,
-    site: 'https://www.roblox.com',
-    genre: genres[2],
-  },
-  {
-    id: uuidv4(),
-    name: 'Horizon zero down',
-    description: 'Jogo aventura de mundo aberto',
-    dateRelease: new Date('2023-12-15'),
-    rating: 9.9,
-    site: 'https://www.horizon.com',
-    genre: genres[2],
-  },
-]
+import { Repository } from 'typeorm';
+import { InjectRepository } from 'typeorm-typedi-extensions';
 
 @Resolver(() => Game)
 export class GameResolver {
-  gameRepository: any;
+  constructor(
+    @InjectRepository(Game) private readonly gameRepository: Repository<Game>,
+    @InjectRepository(Genre) private readonly genreRepository: Repository<Genre>
+  ) {}
+
   @Query(() => String)
   async helloGame() {
     return 'Hello Game';
@@ -52,9 +27,9 @@ export class GameResolver {
   // Cria um game
   @Mutation(() => Game)
   async CreateGame(@Arg('data') data: CreateGameInput): Promise<Game> {
-    const genre = await this.gameRepository.findOne(data.genreId);
+    const genre = await this.genreRepository.findOne({ id: data.genreId });
     if (!genre) {
-      throw new Error('Genre not found');
+      throw new Error('Gênero não encontrado');
     }
 
     const game = this.gameRepository.create({
@@ -68,7 +43,10 @@ export class GameResolver {
   }
 
   @FieldResolver(() => Genre)
-  async genre(@Root() game: Game): Promise<Genre> {
-    return this.gameRepository.findOne(game.genre.id);
+  async genre(@Root() game: Game): Promise<Genre | null> {
+    if (!game.genre) {
+      return null; // Ou lançar um erro, dependendo do comportamento desejado
+    }
+    return this.genreRepository.findOne({ id: game.genre.id });
   }
 }
