@@ -1,5 +1,5 @@
 // src/entity/Genre.ts
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql";
 import { Game } from "./Game";
 
@@ -16,5 +16,6 @@ export class Genre {
 
   @Field(() => [Game], { nullable: true })
   @OneToMany(() => Game, (game) => game.genre)
+  @JoinColumn({ name: "id" })
   games?: Game[];
 }

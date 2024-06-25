@@ -169,12 +169,18 @@ CREATE TABLE user (
 
 yarn global add typeorm ts-node
 
-npm run dev
+npm run dev // rodar
 
 typeorm migration:create -n CriarTabelaGame -d src/database/migrations
 
 typeorm migration:create ./path-to-migrations-dir/PostRefactoring
 
+npx typeorm migration:create -n CriarTabelaGame -d src/migrations
 
-typeorm migration:run // migração
+
+npm run migration:generate // migração com npm, funcionou
+
+npm run migration:run // rodar
+
+
 ```

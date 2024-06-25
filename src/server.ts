@@ -6,7 +6,6 @@ import { GameResolver } from './resolvers/game-resovers';
 import { GenreResolver } from './resolvers/genre-resovers';
 import { UserResolver } from './resolvers/user-resolver';
 import { AppDataSource } from './database/data-source';
-const mysql = require('mysql2');
 
 async function bootstrap() {
   await AppDataSource.initialize(); // Garantir conexão ao banco de dados
