@@ -1,11 +1,11 @@
 {
-  "type": "mysql",
+  "type": "postgres",
   "host": "localhost",
-  "port": 3306,
-  "username": "ederpbj",
-  "password": "b@tista",
-  "database": "game",
-  "synchronize": true,
+  "port": 5432,
+  "username": "postgres",
+  "password": "batista123",
+  "database": "postgres",
+  "synchronize": false,
   "logging": false,
   "entities": [
     "src/entity/**/*.ts"
@@ -18,7 +18,7 @@
   ],
   "cli": {
     "entitiesDir": "src/entity",
-    "migrationsDir": "src/migration",
+    "migrationsDir": "src/migrations",
     "subscribersDir": "src/subscriber"
   }
 }
