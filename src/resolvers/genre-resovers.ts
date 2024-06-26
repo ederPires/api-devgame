@@ -1,3 +1,33 @@
+import { Arg, Mutation, Resolver, Query } from 'type-graphql';
+import { CreateGenreInput } from '../dtos/inputs/create-genre-inputs';
+import { Genre } from '../dtos/models/genres-model';
+import { AppDataSource } from '../database/data-source';
+import { v4 as uuidv4 } from 'uuid'; // Para gerar IDs únicos
+
+@Resolver()
+export class GenreResolver {
+  private genreRepository = AppDataSource.getRepository(Genre);
+
+  @Query(() => [Genre])
+  async genres(): Promise<Genre[]> {
+    return this.genreRepository.find();
+  }
+
+  @Query(() => Genre, { nullable: true })
+  async genre(@Arg('id') id: string): Promise<Genre | undefined> {
+    return this.genreRepository.findOneBy({ id });
+  }
+  @Mutation(() => Genre)
+  async createGenre(@Arg('data') data: CreateGenreInput): Promise<Genre> {
+    const genre = this.genreRepository.create(data);
+    return this.genreRepository.save(genre);
+  }
+
+}
+
+
+
+/* Simula um DB
 import { Arg, FieldResolver, ID, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { CreateGenreInput } from '../dtos/inputs/create-genre-inputs';
 import { Genre } from '../dtos/models/genres-model';
@@ -47,3 +77,4 @@ export class GenreResolver {
     return genre;
   }
 }
+*/

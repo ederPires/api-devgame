@@ -43,15 +43,15 @@ type Genre {
 }
 
 type Mutation {
-  CreateGame(data: CreateGameInput!): Game!
-  CreateGenre(data: CreateGenreInput!): Genre!
+  createGame(data: CreateGameInput!): Game!
+  createGenre(data: CreateGenreInput!): Genre!
   createUser(data: CreateUserInput!): User!
 }
 
 type Query {
   games: [Game!]!
+  genre(id: String!): Genre
   genres: [Genre!]!
-  helloGame: String!
   user(id: String!): User
   users: [User!]!
 }

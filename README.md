@@ -6,6 +6,8 @@
 [Typegraphql](https://typegraphql.com/docs/introduction.html)
 [Figma](https://www.figma.com/design/nm1k9zoVt2vdBZV6RtmWAk/Game-App-Desafio?node-id=0-1)
 
+#### Configurações inicias
+
 ```Javascript
 
 npm init -y // iniciar o projeto
@@ -29,6 +31,32 @@ npm install graphql graphql-scalars type-graphql // Instalar
 
 npm install reflect-metadata //dependências
 //teste
+
+```
+
+#### Postgres
+
+```Javascript
+// Mudar para postgres
+yarn add typeorm pg reflect-metadata // instalar pacote necessário
+
+yarn typeorm migration:create -n CreateUserTable // fazer a migração
+
+yarn add typeorm-typedi-extensions // instalar pacote necessário
+
+yarn add typedi // instalar pacote necessário
+
+npm run migration:revert // reverte as migrações feitas
+// Erro de migração corrigido no package
+// apagar as migrations, gerar novamente
+// erro de tipo integer
+ChangeRatingTypeToFloat // criar migration
+
+npm run migration:generate // migração com npm, funcionou
+
+npm run migration:run // rodar migração
+
+npm run dev // rodar projeto
 
 ```
 
@@ -87,9 +115,11 @@ npx typeorm migration:run // rodar as migrações
 
 docker compose up // rodar o docker com mysql
 
-xxx
+```
 
-// Docker
+#### Docker
+
+```Javascript
 
 docker compose exec db bash // entrar no docker
 mysql -u root -p // entrar no mysql
@@ -171,24 +201,5 @@ npx typeorm migration:create -n CriarTabelaGame -d src/migrations
 npm run migration:generate // migração com npm, funcionou
 
 npm run migration:run // rodar
-
-
-// Mudar para postgres
-yarn add typeorm pg reflect-metadata // instalar pacote necessário
-
-yarn typeorm migration:create -n CreateUserTable // fazer a migração
-
-npm run migration:generate // migração com npm, funcionou
-
-npm run migration:run // rodar migração
-
-npm run migration:revert // reverte as migrações feitas
-
-npm run dev // rodar projeto
-
-// Erro de migração corrigido no package
-// apagar as migrations, gerar novamente
-
-
 
 ```

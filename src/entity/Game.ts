@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql";
 import { Genre } from "./Genre";
 
@@ -7,18 +7,30 @@ import { Genre } from "./Genre";
 export class Game {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string; // Identificador único do jogo, gerado automaticamente como UUID
 
   @Field()
   @Column()
-  title: string;
+  name: string; // Nome do jogo
 
   @Field()
   @Column()
-  description: string;
+  description: string; // Descrição do jogo
+
+  @Field()
+  @Column({ type: 'date' })
+  dateRelease: Date; // Data de lançamento do jogo
+
+  @Field()
+  @Column({ type: 'float' }) // Certifique-se de que o tipo é 'float'
+  rating: number;
+
+  @Field()
+  @Column()
+  site: string; // URL do site do jogo
 
   @Field(() => Genre)
   @ManyToOne(() => Genre, genre => genre.games)
-  @JoinColumn({ name: "id" })
-  genre: Genre;
+  @JoinColumn({ name: "genreId" }) // Nome da coluna de junção que contém a chave estrangeira
+  genre: Genre; // Relação muitos-para-um com a entidade Genre
 }
