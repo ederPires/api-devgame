@@ -1,8 +1,9 @@
-import { Arg, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
+import { Arg, FieldResolver, Mutation, Query, Resolver, Root, UseMiddleware } from 'type-graphql';
 import { CreateGameInput } from '../../dtos/inputs/create-game-inputs';
 import { Game } from '../../models/game-model';
 import { Genre } from '../../models/genres-model';
 import { AppDataSource } from '../../database/data-source';
+import { AuthMiddleware } from '../../middlewares/auth-middleware';
 
 @Resolver(() => Game)
 export class GameResolver {
@@ -17,6 +18,7 @@ export class GameResolver {
 
   // Cria um game
   @Mutation(() => Game)
+  @UseMiddleware(AuthMiddleware) // Aplicando middleware de autenticação
   async createGame(@Arg('data') data: CreateGameInput): Promise<Game> {
     const { genreId, ...gameData } = data; // Separar genreId dos dados do jogo
 
