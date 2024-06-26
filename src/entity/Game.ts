@@ -29,6 +29,10 @@ export class Game {
   @Column()
   site: string; // URL do site do jogo
 
+  @Field()
+  @Column() // Novo campo adicionado
+  urlImage: string; // URL da imagem do jogo
+
   @Field(() => Genre)
   @ManyToOne(() => Genre, genre => genre.games)
   @JoinColumn({ name: "genreId" }) // Nome da coluna de junção que contém a chave estrangeira

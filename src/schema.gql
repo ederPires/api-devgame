@@ -10,6 +10,7 @@ input CreateGameInput {
   name: String!
   rating: Float!
   site: String!
+  urlImage: String!
 }
 
 input CreateGenreInput {
@@ -35,6 +36,7 @@ type Game {
   name: String!
   rating: Float!
   site: String!
+  urlImage: String!
 }
 
 type Genre {

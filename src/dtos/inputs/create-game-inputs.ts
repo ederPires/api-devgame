@@ -18,5 +18,8 @@ export class CreateGameInput {
   site: string;
 
   @Field()
+  urlImage: string; // URL da imagem do jogo
+
+  @Field()
   genreId: string; // ID do gênero que será associado ao jogo
 }

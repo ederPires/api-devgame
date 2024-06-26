@@ -31,6 +31,10 @@ export class Game {
   @Column()
   site: string;
 
+  @Field()
+  @Column()
+  urlImage: string; // URL da imagem do jogo
+
   @Field(() => Genre)
   @ManyToOne(() => Genre, (genre) => genre.games)
   genre: Genre;

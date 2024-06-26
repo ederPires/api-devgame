@@ -32,6 +32,10 @@ npm install graphql graphql-scalars type-graphql // Instalar
 npm install reflect-metadata //dependências
 //teste
 
+npm install bcryptjs
+
+npm install @types/bcryptjs --save-dev
+
 ```
 
 #### Postgres
