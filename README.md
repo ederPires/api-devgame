@@ -63,6 +63,15 @@ npm run migration:run // rodar migração
 npm run dev // rodar projeto
 
 ```
+#### Middleware
+
+```Javascript
+npm install graphql-middleware // instalar pacote necessário
+
+
+
+
+```
 
 #### Criando servidor avançado
 

@@ -1,7 +1,7 @@
 import { Arg, Mutation, Resolver, Query } from 'type-graphql';
-import { CreateGenreInput } from '../dtos/inputs/create-genre-inputs';
-import { Genre } from '../dtos/models/genres-model';
-import { AppDataSource } from '../database/data-source';
+import { CreateGenreInput } from '../../dtos/inputs/create-genre-inputs';
+import { Genre } from '../../models/genres-model';
+import { AppDataSource } from '../../database/data-source';
 import { v4 as uuidv4 } from 'uuid'; // Para gerar IDs únicos
 
 @Resolver()

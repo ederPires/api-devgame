@@ -9,13 +9,13 @@ export const AppDataSource = new DataSource({
   password: 'batista123',
   database: 'postgres',
   entities: [
-    path.join(__dirname, '../dtos/models/**/*.ts')
+    path.join(__dirname, '../models/**/*.ts')
   ],
   migrations: [
-    path.join(__dirname, '../migrations/**/*.ts')
+    path.join(__dirname, '../database/migrations/**/*.ts')
   ],
   subscribers: [
-    path.join(__dirname, '../subscriber/**/*.ts')
+    path.join(__dirname, '../database/subscriber/**/*.ts')
   ],
   synchronize: false,
   logging: true,

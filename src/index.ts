@@ -2,8 +2,8 @@ import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { ApolloServer } from "apollo-server";
 import { buildSchema } from "type-graphql";
-import { GameResolver } from "./resolvers/game-resovers";
-import { GenreResolver } from "./resolvers/genre-resovers";
+import { GameResolver } from "./dtos/resolvers/game-resovers";
+import { GenreResolver } from "./dtos/resolvers/genre-resovers";
 
 async function startServer() {
   try {
