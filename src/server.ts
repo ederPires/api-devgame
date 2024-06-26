@@ -2,9 +2,9 @@ import { ApolloServer } from 'apollo-server';
 import "reflect-metadata";
 import { buildSchema } from 'type-graphql';
 import path from 'node:path';
-import { GameResolver } from './resolvers/game-resovers';
-import { GenreResolver } from './resolvers/genre-resovers';
-import { UserResolver } from './resolvers/user-resolver';
+import { GameResolver } from './dtos/resolvers/game-resovers';
+import { GenreResolver } from './dtos/resolvers/genre-resovers';
+import { UserResolver } from './dtos/resolvers/user-resolver';
 import { AppDataSource } from './database/data-source';
 
 async function bootstrap() {
