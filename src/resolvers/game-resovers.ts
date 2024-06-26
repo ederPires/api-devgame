@@ -2,21 +2,12 @@ import { Arg, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphq
 import { CreateGameInput } from '../dtos/inputs/create-game-inputs';
 import { Game } from '../dtos/models/game-model';
 import { Genre } from '../dtos/models/genres-model';
-import { v4 as uuidv4 } from 'uuid';
-import { Repository } from 'typeorm';
-import { InjectRepository } from 'typeorm-typedi-extensions';
+import { AppDataSource } from '../database/data-source';
 
 @Resolver(() => Game)
 export class GameResolver {
-  constructor(
-    @InjectRepository(Game) private readonly gameRepository: Repository<Game>,
-    @InjectRepository(Genre) private readonly genreRepository: Repository<Genre>
-  ) {}
-
-  @Query(() => String)
-  async helloGame() {
-    return 'Hello Game';
-  }
+  private gameRepository = AppDataSource.getRepository(Game);
+  private genreRepository = AppDataSource.getRepository(Genre);
 
   // Lista os games
   @Query(() => [Game])
@@ -26,27 +17,33 @@ export class GameResolver {
 
   // Cria um game
   @Mutation(() => Game)
-  async CreateGame(@Arg('data') data: CreateGameInput): Promise<Game> {
-    const genre = await this.genreRepository.findOne({ id: data.genreId });
+  async createGame(@Arg('data') data: CreateGameInput): Promise<Game> {
+    const { genreId, ...gameData } = data; // Separar genreId dos dados do jogo
+
+    const genre = await this.genreRepository.findOne({ where: { id: genreId } }); // Encontrar o gênero pelo ID
+
     if (!genre) {
       throw new Error('Gênero não encontrado');
     }
 
     const game = this.gameRepository.create({
-      ...data,
-      genre,
+      ...gameData, // Incluir os dados do jogo
+      genre: genre, // Associar o gênero encontrado ao jogo
     });
 
-    await this.gameRepository.save(game);
+    console.log("Jogo criado com sucesso");
+    console.log(game);
+    await this.gameRepository.save(game); // Salvar o jogo no banco de dados
 
-    return game;
+    return game; // Retornar o jogo criado
   }
 
+  // Resolver para carregar o gênero associado ao jogo
   @FieldResolver(() => Genre)
   async genre(@Root() game: Game): Promise<Genre | null> {
     if (!game.genre) {
-      return null; // Ou lançar um erro, dependendo do comportamento desejado
+      return null; // Caso o jogo não tenha um gênero associado
     }
-    return this.genreRepository.findOne({ id: game.genre.id });
+    return this.genreRepository.findOne({ where: { id: game.genre.id } }); // Carregar o gênero associado pelo ID
   }
 }
