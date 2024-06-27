@@ -9,6 +9,7 @@ export class GenreResolver {
 
   @Query(() => [GenreEntity])
   async genres(): Promise<GenreEntity[]> {
+    // Buscando gêneros sem incluir os jogos associados
     return this.genreRepository.find();
   }
 

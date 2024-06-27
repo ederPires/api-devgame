@@ -8,8 +8,8 @@ export class CreateGameInput {
   @Field()
   description: string;
 
-  @Field()
-  dateRelease: Date;
+  @Field({ nullable: true }) // torna dateRelease opcional se não for sempre fornecido
+  dateRelease?: string;
 
   @Field(() => Float)
   rating: number;

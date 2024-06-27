@@ -10,7 +10,7 @@ export const IsAuthenticated: MiddlewareFn<MyContext> = ({ context }, next) => {
 
   const token = authHeader.split(" ")[1];
   try {
-    const payload = jwt.verify(token, "your_secret_key");
+    const payload = jwt.verify(token, process.env.JWT_SECRET_KEY || "your_secret_key");
     context.payload = payload as any;
   } catch (err) {
     throw new Error("Not authenticated");

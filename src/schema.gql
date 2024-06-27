@@ -4,7 +4,7 @@
 # -----------------------------------------------
 
 input CreateGameInput {
-  dateRelease: DateTimeISO!
+  dateRelease: String
   description: String!
   genreId: String!
   name: String!

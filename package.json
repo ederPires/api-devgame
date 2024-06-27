@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsnd --respawn --transpile-only src/server.ts",
-    "migration:create": "npx typeorm-ts-node-commonjs migration:create ./src/database/migrations/schema-update -d ./src/database/data-source.ts",
+    "migration:create": "npx typeorm migration:create ./src/database/migrations/schema-create",
     "migration:generate": "npx typeorm-ts-node-commonjs migration:generate ./src/database/migrations/schema-update -d ./src/database/data-source.ts",
     "migration:show": "npx typeorm-ts-node-commonjs migration:show -d ./src/database/data-source.ts",
     "migration:run": "npx typeorm-ts-node-commonjs migration:run -d  ./src/database/data-source.ts",
@@ -27,6 +27,8 @@
     "@prisma/client": "^5.15.1",
     "apollo-server": "^3.13.0",
     "bcryptjs": "^2.4.3",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "graphql": "^16.8.2",

@@ -7,6 +7,9 @@ import { GenreResolver } from "./dtos/resolvers/GenreResover";
 import { UserResolver } from "./dtos/resolvers/UserResolver";
 import { AppDataSource } from "./database/data-source";
 import { MyContext } from "./types/MyContext";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 async function bootstrap() {
   await AppDataSource.initialize(); // Garantir conexão ao banco de dados
@@ -15,7 +18,7 @@ async function bootstrap() {
     resolvers: [
       GameResolver,
       GenreResolver,
-      UserResolver // Adicionar o UserResolver aqui
+      UserResolver
     ],
     emitSchemaFile: path.resolve(__dirname, "schema.gql"),
     authChecker: ({ context }: { context: MyContext }) => {
@@ -25,7 +28,21 @@ async function bootstrap() {
 
   const server = new ApolloServer({
     schema,
-    context: ({ req, res }): MyContext => ({ req, res }),
+    context: ({ req, res }): MyContext => {
+      const authHeader = req.headers.authorization;
+      let payload = null;
+
+      if (authHeader) {
+        const token = authHeader.split(" ")[1];
+        try {
+          payload = jwt.verify(token, process.env.JWT_SECRET_KEY || "your_secret_key");
+        } catch (err) {
+          console.error("Invalid token", err);
+        }
+      }
+
+      return { req, res, payload };
+    },
   });
 
   const { url } = await server.listen();

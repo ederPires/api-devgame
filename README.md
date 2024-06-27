@@ -36,6 +36,8 @@ npm install bcryptjs
 
 npm install @types/bcryptjs --save-dev
 
+npm i date-fns // tratar datas
+
 ```
 
 #### Postgres
