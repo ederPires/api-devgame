@@ -5,10 +5,10 @@
   "username": "postgres",
   "password": "batista123",
   "database": "postgres",
-  "synchronize": false,
+  "synchronize": true,
   "logging": false,
   "entities": [
-    "src/entity/**/*.ts"
+    "src/entities/**/*.ts"
   ],
   "migrations": [
     "src/database/migrations/**/*.ts"
@@ -17,7 +17,7 @@
     "src/database/subscribers/**/*.ts"
   ],
   "cli": {
-    "entitiesDir": "src/entity",
+    "entitiesDir": "src/entities",
     "migrationsDir": "src/database/migrations",
     "subscribersDir": "src/database/subscriber"
   }

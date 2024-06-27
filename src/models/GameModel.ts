@@ -1,11 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { Genre } from './genres-model';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Genre } from './GenresModel';
 import { Field, ObjectType, ID, Float } from 'type-graphql';
 
 
 // informações disponíveis para o front-end consumir
 @ObjectType()
-@Entity()
+@Entity("games")
 export class Game {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
@@ -20,11 +20,11 @@ export class Game {
   description: string;
 
   @Field()
-  @Column()
+  @Column({ type: 'date' })
   dateRelease: Date;
 
-  @Field(() => Float)
-  @Column()
+  @Field()
+  @Column({ type: 'float' })
   rating: number;
 
   @Field()
@@ -37,5 +37,6 @@ export class Game {
 
   @Field(() => Genre)
   @ManyToOne(() => Genre, (genre) => genre.games)
+  @JoinColumn({ name: 'genreId' })
   genre: Genre;
 }
