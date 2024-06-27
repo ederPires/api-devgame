@@ -4,8 +4,8 @@ import * as bcrypt from 'bcryptjs';
 
 
 @ObjectType()
-@Entity()
-export class User {
+@Entity("users")
+export class UserEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
   id: string;

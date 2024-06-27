@@ -70,7 +70,8 @@ npm install graphql-middleware // instalar pacote necessário
 
 npm install type-graphql typeorm apollo-server express express-session reflect-metadata
 
-
+// token
+npm install jsonwebtoken
 
 
 

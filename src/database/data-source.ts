@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import path from 'path';
 
+
 export const AppDataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
@@ -9,7 +10,7 @@ export const AppDataSource = new DataSource({
   password: 'batista123',
   database: 'postgres',
   entities: [
-    path.join(__dirname, '../models/**/*.ts')
+    path.join(__dirname, '../entities/**/*.ts')
   ],
   migrations: [
     path.join(__dirname, '../database/migrations/**/*.ts')
@@ -17,6 +18,6 @@ export const AppDataSource = new DataSource({
   subscribers: [
     path.join(__dirname, '../database/subscriber/**/*.ts')
   ],
-  synchronize: false,
+  synchronize: true, // não usar em produção como true
   logging: true,
 });

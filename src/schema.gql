@@ -17,21 +17,15 @@ input CreateGenreInput {
   name: String!
 }
 
-input CreateUserInput {
-  email: String!
-  name: String!
-  password: String!
-}
-
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.
 """
 scalar DateTimeISO
 
-type Game {
+type GameEntity {
   dateRelease: DateTimeISO!
   description: String!
-  genre: Genre!
+  genre: GenreEntity!
   id: ID!
   name: String!
   rating: Float!
@@ -39,28 +33,21 @@ type Game {
   urlImage: String!
 }
 
-type Genre {
+type GenreEntity {
+  games: [GameEntity!]
   id: ID!
   name: String!
 }
 
 type Mutation {
-  createGame(data: CreateGameInput!): Game!
-  createGenre(data: CreateGenreInput!): Genre!
-  createUser(data: CreateUserInput!): User!
+  createGame(data: CreateGameInput!): GameEntity!
+  createGenre(data: CreateGenreInput!): GenreEntity!
+  login(email: String!, password: String!): String!
+  register(email: String!, name: String!, password: String!): String!
 }
 
 type Query {
-  games: [Game!]!
-  genre(id: String!): Genre
-  genres: [Genre!]!
-  user(id: String!): User
-  users: [User!]!
-}
-
-type User {
-  email: String!
-  id: ID!
-  name: String!
-  password: String!
+  games: [GameEntity!]!
+  genres: [GenreEntity!]!
+  protectedData: String!
 }

@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Game } from './game-model';
+import { Game } from './GameModel';
 import { Field, ObjectType, ID } from 'type-graphql';
 
 @ObjectType()
-@Entity()
+@Entity("genres")
 export class Genre {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')

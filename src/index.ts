@@ -4,10 +4,10 @@ import { ApolloServer } from "apollo-server-express";
 import Express from "express";
 import { buildSchema } from "type-graphql";
 import session from "express-session";
-import { GameResolver } from "./dtos/resolvers/game-resolver";
-import { GenreResolver } from "./dtos/resolvers/genre-resolver";
+import { GameResolver } from "./dtos/resolvers/GameResover";
+import { GenreResolver } from "./dtos/resolvers/GenreResover";
 import { MyContext } from "./types/MyContext";
-import { UserResolver } from "./dtos/resolvers/user-resolver";
+import { UserResolver } from "./dtos/resolvers/UserResolver";
 
 async function startServer() {
   try {
