@@ -38,6 +38,10 @@ npm install @types/bcryptjs --save-dev
 
 npm i date-fns // tratar datas
 
+npm install graphql-ws @apollo/server @apollo/subgraph // subcription. websockets
+
+
+
 ```
 
 #### Postgres
