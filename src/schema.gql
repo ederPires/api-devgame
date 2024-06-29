@@ -51,3 +51,7 @@ type Query {
   genres: [GenreEntity!]!
   protectedData: String!
 }
+
+type Subscription {
+  gameCreated: GameEntity!
+}
