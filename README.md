@@ -38,9 +38,18 @@ npm install @types/bcryptjs --save-dev
 
 npm i date-fns // tratar datas
 
+//Websockets
+
 npm install graphql-ws @apollo/server @apollo/subgraph // subcription. websockets
 
+npm install rimraf@latest // atualizar rimfa
 
+npm outdated // verifica dependências desatualizadas
+
+yarn add @apollo/subgraph@latest // última versão @latest
+
+rm -rf node_modules package-lock.json // remover node_modules e package
+npm install
 
 ```
 

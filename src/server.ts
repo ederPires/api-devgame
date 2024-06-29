@@ -1,39 +1,57 @@
-import { ApolloServer } from 'apollo-server';
+import express from 'express';
 import { createServer } from 'http';
 import { WebSocketServer } from 'ws';
-import { useServer } from 'graphql-ws/lib/use/ws';
-import 'reflect-metadata';
-import { buildSchema } from 'type-graphql';
-import path from 'node:path';
+import { AppDataSource } from './database/data-source';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 import { GameResolver } from './dtos/resolvers/GameResover';
 import { GenreResolver } from './dtos/resolvers/GenreResover';
 import { UserResolver } from './dtos/resolvers/UserResolver';
-import { AppDataSource } from './database/data-source';
-import { MyContext } from './types/MyContext';
-import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
-import { PubSub } from 'graphql-subscriptions'; // Verifique se a importação está correta
+import { ApolloServer } from 'apollo-server-express';
+import { buildSchema } from 'type-graphql';
+import { PubSub } from 'graphql-subscriptions';
+import 'reflect-metadata';
+import path from 'path';
 
 dotenv.config();
 
 async function bootstrap() {
-  await AppDataSource.initialize(); // Garantir conexão ao banco de dados
+  await AppDataSource.initialize(); // Inicialize a conexão com o banco de dados
 
-  const pubSub = new PubSub(); // Inicialização do PubSub
+  const app = express();
+  const httpServer = createServer(app);
+
+  const wsServer = new WebSocketServer({ server: httpServer });
+  //const pubSub = new PubSub(); // Inicializa o PubSub para usar com GraphQL Subscriptions: error
+
+  const clients = new Set<WebSocket>();
+
+  wsServer.on('connection', (ws) => {
+    clients.add(ws);
+
+    ws.on('message', (message) => {
+      console.log('received: %s', message);
+    });
+
+    ws.on('close', () => {
+      clients.delete(ws);
+    });
+  });
+
+  const pubSub = new PubSub();
 
   const schema = await buildSchema({
     resolvers: [GameResolver, GenreResolver, UserResolver],
     emitSchemaFile: path.resolve(__dirname, 'schema.gql'),
-    authChecker: ({ context }: { context: MyContext }) => {
-      return !!context.payload;
+    authChecker: ({ context }) => {
+      return !!context.payload; // Verifica se há um payload de autenticação no contexto
     },
+    pubSub, // Passa o PubSub para o schema GraphQL
   });
 
-  const httpServer = createServer();
-
-  const server = new ApolloServer({
+  const apolloServer = new ApolloServer({
     schema,
-    context: ({ req, res }): MyContext => {
+    context: ({ req, res }) => {
       const authHeader = req.headers.authorization;
       let payload = null;
 
@@ -46,27 +64,20 @@ async function bootstrap() {
         }
       }
 
-      return { req, res, payload, pubSub }; // Incluir pubSub no contexto
+      return { req, res, payload, wsServer, clients, pubSub }; // Inclui wsServer e pubSub no contexto Apollo
     },
   });
 
-  await server.start();
+  await apolloServer.start();
 
-  server.applyMiddleware({ app: httpServer });
-
-  const wsServer = new WebSocketServer({
-    server: httpServer,
-    path: '/graphql',
-  });
-
-  useServer({ schema }, wsServer);
+  apolloServer.applyMiddleware({ app });
 
   const PORT = process.env.PORT || 4000;
 
   httpServer.listen(PORT, () => {
-    console.log(`🚀 Servidor HTTP rodando em http://localhost:${PORT}${server.graphqlPath}`);
-    console.log(`🚀 Servidor de WebSocket rodando em ws://localhost:${PORT}${server.graphqlPath}`);
+    console.log(`🚀 Servidor rodando em http://localhost:${PORT}${apolloServer.graphqlPath}`);
+    console.log(`🚀 WebSocket rodando em ws://localhost:${PORT}`);
   });
 }
 
-bootstrap();
+bootstrap().catch((err) => console.error(err));
