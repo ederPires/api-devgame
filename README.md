@@ -1,12 +1,24 @@
 # api-node
- criando api com node e apollo
+> criando api com node e apollo
+
+## Índice
+
+1. [Configuração](#configuração)
+2. [Links](#links)
+3. [Data base](#database)
+4. [Middleware](#middleware)
+5. [Docker](#docker)
+6. [Autor](#autor)
+
+ ## Links
+
 [Tutorial](https://www.youtube.com/watch?v=1dz48pReq_c&ab_channel=Rocketseat)
 [github api-node](https://github.com/ederPires/api-devgame)
 [Documentação Apollo](https://www.apollographql.com/docs/apollo-server/)
 [Typegraphql](https://typegraphql.com/docs/introduction.html)
 [Figma](https://www.figma.com/design/nm1k9zoVt2vdBZV6RtmWAk/Game-App-Desafio?node-id=0-1)
 
-#### Configurações inicias
+## Configuração
 
 ```Javascript
 
@@ -53,7 +65,9 @@ npm install
 
 ```
 
-#### Postgres
+## Database
+
+### Postgres
 
 ```Javascript
 // Mudar para postgres
@@ -78,7 +92,8 @@ npm run migration:run // rodar migração
 npm run dev // rodar projeto
 
 ```
-#### Middleware
+
+## Middleware
 
 ```Javascript
 npm install graphql-middleware // instalar pacote necessário
@@ -92,64 +107,7 @@ npm install jsonwebtoken
 
 ```
 
-#### Criando servidor avançado
-
-caminho inicial
-src/server.ts
-
-```Javascript
-
-"dev": "tsnd --respawn --transpile-only src/server.ts" // incluir no package
-
-npm run dev // rodar aplicação
-
-// criando pasta dto, Data Transfer objects, ou inputs
-// inputs são os parametros a receber
-
-// Ativar no tsconfig
-"target": "ES2021",
-"lib": ["es2018", "ESNext.AsyncIterable"],
-"experimentalDecorators": true,
-"emitDecoratorMetadata": true,
-"strictPropertyInitialization": false,
-```
-
-#### Integrar ao SQlite
-
-```Javascript
-npm install typeorm sqlite3 reflect-metadata // instalar
-
-// Atualizar os modelos para usar as entidades do TypeORM.
-// Criar o index
-npm install typeorm --save-dev // atualizar o package
-
-"scripts": {
-    "typeorm": "typeorm-ts-node-commonjs"
-  }
-
-npm run typeorm migration:run // rodar as migrações
-```
-
-#### Integrar ao mysql
-
-```Javascript
-npm install typeorm reflect-metadata mysql
-
-npm install typeorm reflect-metadata mysql apollo-server type-graphql // todas as dependências
-
-npm install -g npm@10.8.1
-
-npm install mysql typeorm reflect-metadata // instalar
-
-npx typeorm migration:create -n CreateGames // criar migrations
-
-npx typeorm migration:run // rodar as migrações
-
-docker compose up // rodar o docker com mysql
-
-```
-
-#### Docker
+## Docker
 
 ```Javascript
 
@@ -235,3 +193,9 @@ npm run migration:generate // migração com npm, funcionou
 npm run migration:run // rodar
 
 ```
+
+## Autor
+
+* Éder Pires Batista
+* Contato: 83 99655-5344
+* e-mail: ederpbj@gmail.com
