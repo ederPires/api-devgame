@@ -12,11 +12,13 @@
 
  ## Links
 
-[Tutorial](https://www.youtube.com/watch?v=1dz48pReq_c&ab_channel=Rocketseat)
-[github api-node](https://github.com/ederPires/api-devgame)
-[Documentação Apollo](https://www.apollographql.com/docs/apollo-server/)
-[Typegraphql](https://typegraphql.com/docs/introduction.html)
-[Figma](https://www.figma.com/design/nm1k9zoVt2vdBZV6RtmWAk/Game-App-Desafio?node-id=0-1)
+* [Tutorial](https://www.youtube.com/watch?v=1dz48pReq_c&ab_channel=Rocketseat)
+* [github api-node](https://github.com/ederPires/api-devgame)
+* [Documentação Apollo](https://www.apollographql.com/docs/apollo-server/)
+* [Typegraphql](https://typegraphql.com/docs/introduction.html)
+* [Figma](https://www.figma.com/design/nm1k9zoVt2vdBZV6RtmWAk/Game-App-Desafio?node-id=0-1)
+
+
 
 ## Configuração
 
