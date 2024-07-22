@@ -1,5 +1,5 @@
 # api-node
-> criando api com node e apollo
+> criando api com node, apollo e graphql, para conectar com o app devGame feito em react-native e typescript.
 
 ## Índice
 
