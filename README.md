@@ -23,6 +23,7 @@
 ## Configuração
 
 ```Javascript
+npm run dev // rodar projeto
 
 npm init -y // iniciar o projeto
 
